@@ -1,0 +1,25 @@
+<p>tile works!</p>
+
+<p *ngFor="let alert of alerts">
+  <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+</p>
+<p>
+  <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
+</p>
+
+<div class="alert alert-secondary" role="alert">
+  This is a secondary alert—check it out!
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <ngb-alert type="success" [dismissible]="false">
+      Bootstrap is working!
+    </ngb-alert>
+
+    <h1>
+      <i class="fa fa-bath" aria-hidden="true"></i>
+      And so is Font Awesome!
+    </h1>
+  </div>
+</div>

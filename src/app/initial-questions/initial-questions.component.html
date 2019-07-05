@@ -1,0 +1,37 @@
+<table>
+  <tbody>
+    <tr>
+      <td class="cell">
+          Alto / ancho del tablero (entre 4 y 15)
+      </td>
+      <td class="cell">
+          <input type="number" min="4" max="15" class="form-control" [(ngModel)]="boardWidth" (change)="onBoardWithChange()">
+      </td>
+      <td class="cell">
+        {{totalCells}} casillas
+      </td>
+    </tr>
+    <tr>
+      <td class="cell">
+          Nº de pozos (Máximo nº de celdas - 3)
+      </td>
+      <td class="cell">
+          <input type="number" min="0" class="form-control" [(ngModel)]="pitsCount" (change)="onPitsCountChange()">
+      </td>
+      <td class="cell">
+          &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td class="cell">
+          Nº de flechas
+      </td>
+      <td class="cell">
+          <input type="number" min="1" class="form-control" [(ngModel)]="arrowsCount">
+      </td>
+      <td class="cell">
+          <button type="button" class="btn btn-primary" (click)="startGame()">Comenzar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

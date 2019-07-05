@@ -8,3 +8,7 @@ Please fork this repo in your account and develop a Java program that implements
 Bonus points for unit tests ;).
 
 Please use Eclipse as your IDE and whatever version of Java you are most confortable with (Scala or Groovy also welcomed). Use whatever framework you prefer for your unit tests.
+
+RESOLUCIÓN
+======
+Siguiendo instrucciones de Emma Perez, de Robert Walters Valencia, he realizado este test con Angular 8

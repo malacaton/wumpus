@@ -1,7 +1,8 @@
+<button type="button" class="btn btn-primary" (click)="stopGame()">Terminar</button>
 <table>
   <tbody>
-    <tr *ngFor="let row of boardWidth">
-      <td></td>
+    <tr *ngFor="let row of boardWidth; let rowNumber=index" [attr.data-index]="rowNumber">
+      <td>{{ rowNumber }}</td>
     </tr>
   </tbody>
 </table>

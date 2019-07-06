@@ -1,2 +1,2 @@
 <app-initial-questions *ngIf="!isPlaying" (playGame)="playGame($event)"></app-initial-questions>
-<app-game-board *ngIf="isPlaying"></app-game-board>
+<app-game-board *ngIf="isPlaying" [gameParams]="gameParams" (endGame)="endGame()"></app-game-board>

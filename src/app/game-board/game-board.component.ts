@@ -1,22 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
 import { GameParams } from '../models/game-params';
 import { Tile } from '../models/tile';
 import { Coordinates } from '../models/coordinates';
 
+export enum KEY_CODE {
+  FIRE = 39,
+  WALK = 37,
+  TURN_LEFT = 79,
+  TURN_RIGHT = 80
+}
+
 @Component({
   selector: 'app-game-board',
   templateUrl: './game-board.component.html',
-  styleUrls: ['./game-board.component.scss'],
-  host: {
-    '(document:keypress)': 'handleKeyboardEvent($event)'
-  }
+  styleUrls: ['./game-board.component.scss']
 })
 export class GameBoardComponent implements OnInit {
   // Properties
-  // height = 0;
-  // width = 0;
-  // pitsCount = 3;
-  // arrowsCount = 3;
   board: any;
   hunterX = 0;
   hunterY = 0;
@@ -36,20 +36,51 @@ export class GameBoardComponent implements OnInit {
   // Events
   @Output() endGame = new EventEmitter<any>();
 
-  @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
     console.log(event);
-  }
 
+    if (event.key === 'Enter') {
+      this.fire();
+    } else if (event.key === ' ') {
+      this.walk();
+    } else if (event.keyCode === KEY_CODE.TURN_LEFT) {
+      this.turnLeft();
+    } else if (event.keyCode === KEY_CODE.TURN_RIGHT) {
+      this.turnRight();
+    }
+  }
 
   constructor() { }
 
   ngOnInit() {
   }
 
-
   tile(row: number, col: number) {
     return this.board[row][col];
+  }
+
+  // Actions
+  turnLeft() {
+    this.hunterDirection -= 1;
+    if (this.hunterDirection < 0) {
+      this.hunterDirection = 3;
+    }
+  }
+
+  turnRight() {
+    this.hunterDirection += 1;
+    if (this.hunterDirection > 3) {
+      this.hunterDirection = 0;
+    }
+  }
+
+  fire() {
+    console.log('Fire');
+  }
+
+  walk() {
+    console.log('Walk');
   }
 
   getHeight() {

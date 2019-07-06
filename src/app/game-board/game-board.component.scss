@@ -1,0 +1,59 @@
+.tableBoard {
+  width: 100%;
+}
+
+.propertiesPanel {
+  width: 25vh;
+  max-width: 220px;
+  padding: 5px;
+  vertical-align: top;
+}
+
+.gamePanel {
+  padding: 5px;
+  min-width: 50vh;
+
+  div {
+    text-align: -webkit-center;
+  }
+}
+
+.perceptionsPanel {
+  width: 25vh;
+  max-width: 200px;
+  padding: 5px;
+  background-color: burlywood;
+  vertical-align: top;
+  text-align: center;
+}
+
+.perceptions {
+  width: 100%;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.tile {
+  width: 50px; 
+  height: 50px;
+}
+
+.visibleTile {
+  background-color: lightcyan;
+}
+
+.wumpusTile {
+  background-image: url('/assets/wumpus.png')
+}
+
+.wumpusDeathTile {
+  background-image: url('/assets/wumpus-death.png')
+}
+
+.pitTile {
+  background-image: url('/assets/pit.png')
+}
+
+.goldTile {
+  background-image: url('/assets/gold.png')
+}

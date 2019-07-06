@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GameParams } from '../models/game-params';
-import { Tile } from '../models/tile';
 
 @Component({
   selector: 'app-game',
@@ -20,33 +19,13 @@ export class GameComponent implements OnInit {
   }
 
   playGame(params: any) {
-    console.log('play 2:', params.boardWidth, params.pitsCount, params.arrowsCount);
+    console.log('params:', params);
     this.isPlaying = true;
-
+    this.gameParams = new GameParams();
     this.gameParams.width = params.boardWidth;
     this.gameParams.height = params.boardWidth;
-    this.gameParams.arrowsCount = params.arrowsCount;
     this.gameParams.pitsCount = params.pitsCount;
-
-    this.gameParams.board = new Array(this.gameParams.width);
-    for (let i = 0; i < this.gameParams.width; i++) {
-      this.gameParams.board[i] = new Array(this.gameParams.height);
-
-      for (let z = 0; z < this.gameParams.height; z++) {
-        this.gameParams.board[i][z] = new Tile();
-      }
-    }
-
-    this.gameParams.hunterX = 0;
-    this.gameParams.hunterY = 0;
-
-    // this.gameParams.board[1][2].hasWumpus = true;
-
-    console.log(this.gameParams);
-
-    // console.log('0,3:', this.gameParams.board[0][3].hasWumpus);
-    // console.log('1,2:', this.gameParams.board[1][2].hasWumpus);
-    // console.log('2,2:', this.gameParams.board[2][2].hasWumpus);
+    this.gameParams.arrowsCount = params.arrowsCount;
   }
 
   endGame() {

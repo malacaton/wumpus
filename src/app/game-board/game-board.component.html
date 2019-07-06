@@ -1,8 +1,55 @@
-<button type="button" class="btn btn-primary" (click)="stopGame()">Terminar</button>
-<table>
+
+<table class="tableBoard">
   <tbody>
-    <tr *ngFor="let row of boardWidth; let rowNumber=index" [attr.data-index]="rowNumber">
-      <td>{{ rowNumber }}</td>
+    <tr>
+      <td class="propertiesPanel">
+        <table class="propertiesTable">
+          <tbody>
+            <tr class="propertyName">
+              <td class="propertyName">Alto del panel:</td>
+              <td class="propertyValue">{{getHeight()}}</td>
+            </tr>
+            <tr class="propertyName">
+              <td class="propertyName">Ancho del panel:</td>
+              <td class="propertyValue">{{getWidth()}}</td>
+            </tr>
+            <tr class="propertyName">
+              <td class="propertyName">Fechas restantes:</td>
+              <td class="propertyValue">{{getArrowsInCarcaj()}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td class="gamePanel">
+        <div>
+          <table>
+            <tbody>
+              <tr *ngFor="let row of board; let rowNumber=index" [attr.data-index]="rowNumber">
+                <!-- <td *ngFor="let col of row; let colNumber=index" [attr.data-index]="colNumber" class="tile" [ngClass]="{'visibleTile': getIsVisible(rowNumber, colNumber)}"> -->
+                <td *ngFor="let col of row; let colNumber=index" [attr.data-index]="colNumber" class="tile">
+                        <!-- {{rowNumber}}{{colNumber}} {{getTileImage(rowNumber, colNumber)}} {{getHasBreeze(rowNumber, colNumber)}} {{getHasStench(rowNumber, colNumber)}}/ -->
+                  <div class="tile" [ngClass]="{'visibleTile': true, 'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeathTile': getIsWumpusDeathPosition(rowNumber, colNumber), 'pitTile': getIsPitPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber)}">
+                    <div *ngIf="hunterY === rowNumber && hunterX === colNumber">
+                      <img src="/assets/hunter-right.png" *ngIf="hunterDirection === 0">
+                      <img src="/assets/hunter-down.png" *ngIf="hunterDirection === 1">
+                      <img src="/assets/hunter-left.png" *ngIf="hunterDirection === 2">
+                      <img src="/assets/hunter-up.png" *ngIf="hunterDirection === 3">
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+
+      <td class="perceptionsPanel">
+        <button type="button" class="btn btn-primary" (click)="stopGame()">Terminar</button>
+        <div class="perceptions">
+asdf sdfsd 
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>

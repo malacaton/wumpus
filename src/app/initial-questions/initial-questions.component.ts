@@ -22,9 +22,9 @@ export class InitialQuestionsComponent implements OnInit {
   }
 
   restartBoard() {
-    this.boardWidth = 4;
+    this.boardWidth = 10;
     this.totalCells = this.boardWidth * this.boardWidth;
-    this.pitsCount = 3;
+    this.pitsCount = 10;
     this.arrowsCount = 3;
   }
 
@@ -41,8 +41,9 @@ export class InitialQuestionsComponent implements OnInit {
   }
 
   startGame() {
-    console.log('play 1');
+    // console.log('this.boardWidth:', this.boardWidth);
+    // console.log('play 1');
     this.playGame.emit({boardWidth: this.boardWidth, pitsCount: this.pitsCount, arrowsCount: this.arrowsCount});
-    console.log('play 3');
+    // console.log('play 3');
   }
 }

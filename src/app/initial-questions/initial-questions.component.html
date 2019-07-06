@@ -8,12 +8,12 @@
           <input type="number" min="4" max="15" class="form-control" [(ngModel)]="boardWidth" (change)="onBoardWithChange()">
       </td>
       <td class="cell">
-        {{totalCells}} casillas
+        &nbsp;
       </td>
     </tr>
     <tr>
       <td class="cell">
-          Nº de pozos (Máximo nº de celdas - 3)
+          Nº de pozos (Máximo {{totalCells - 3}})
       </td>
       <td class="cell">
           <input type="number" min="0" class="form-control" [(ngModel)]="pitsCount" (change)="onPitsCountChange()">

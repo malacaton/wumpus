@@ -2,10 +2,11 @@
 export class Tile {
   isVisible = false;
   startPoint = false;
-  hasPit = false;
-  hasGold = false;
   hasBreeze = false;
   hasStench = false;
+  hasBrightness = false;
+  hasPit = false;
+  hasGold = false;
   hasWumpus = false;
   isWumpusDead = false;
 }

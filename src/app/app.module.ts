@@ -9,6 +9,7 @@ import { InitialQuestionsComponent } from './initial-questions/initial-questions
 import { GameComponent } from './game/game.component';
 import { GameBoardComponent } from './game-board/game-board.component';
 import { PropertiesComponent } from './properties/properties.component';
+import { PerceptionsComponent } from './perceptions/perceptions.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { PropertiesComponent } from './properties/properties.component';
     GameComponent,
     GameBoardComponent,
     PropertiesComponent,
+    PerceptionsComponent,
   ],
   imports: [
     BrowserModule,

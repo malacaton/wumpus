@@ -12,5 +12,13 @@
         <td class="propertyName">Fechas restantes:</td>
         <td class="propertyValue">{{arrowsInCarcaj}}</td>
       </tr>
+      <tr class="propertyName">
+        <td class="propertyName" style="column-span: all;">
+            <div class="accomplished">
+              <div *ngIf="isGoldFound">- Tienes el oro</div>
+              <div *ngIf="isWumpusDeath">- Wumpus muerto</div>
+            </div>
+          </td>
+      </tr>
     </tbody>
   </table>

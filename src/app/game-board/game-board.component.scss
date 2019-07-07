@@ -4,7 +4,7 @@
 
 .propertiesPanel {
   width: 25vh;
-  max-width: 220px;
+  max-width: 250px;
   padding: 5px;
   vertical-align: top;
 }
@@ -27,12 +27,6 @@
   text-align: center;
 }
 
-.perceptions {
-  width: 100%;
-  margin-top: 5px;
-  text-align: left;
-}
-
 .tile {
   width: 50px; 
   height: 50px;
@@ -42,18 +36,50 @@
   background-color: lightcyan;
 }
 
+.startPoint {
+  background-color: cyan;
+}
+
 .wumpusTile {
-  background-image: url('/assets/wumpus.png')
+  background-image: url('/assets/wumpus.png');
 }
 
 .wumpusDeathTile {
-  background-image: url('/assets/wumpus-death.png')
+  background-image: url('/assets/wumpus-death.png');
 }
 
 .pitTile {
-  background-image: url('/assets/pit.png')
+  background-image: url('/assets/pit.png');
 }
 
 .goldTile {
-  background-image: url('/assets/gold.png')
+  background-image: url('/assets/gold.png');
+}
+
+.hunter {
+  background-image: url('/assets/hunter-right.png');
+  height: 50px;
+  width: 50px;
+
+  &.hunterDown {
+    transform: rotate(90deg); /* w3org */
+    -moz-transform: rotate(90deg); /* Firefox */
+    -o-transform: rotate(90deg); /* Opera */
+    -webkit-transform: rotate(90deg); /* Chrome y Safari */
+  }
+
+  &.hunterLeft {
+    -moz-transform: scaleX(-1); /* Firefox */
+    -o-transform: scaleX(-1); /* Opera */
+    -webkit-transform: scaleX(-1); /* Chrome y Safari */
+    transform: scaleX(-1); /* w3org */
+    filter: FlipH; /* Internet Explorer */
+  }
+
+  &.hunterUp {
+    transform: rotate(270deg); /* w3org */
+    -moz-transform: rotate(270deg); /* Firefox */
+    -o-transform: rotate(270deg); /* Opera */
+    -webkit-transform: rotate(270deg); /* Chrome y Safari */
+  }
 }

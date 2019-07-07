@@ -1,0 +1,9 @@
+<button type="button" class="btn btn-primary" (click)="stopGameButton()">Terminar</button>
+<div class="perceptions">
+  <div class="perception" *ngFor="let perception of perceptions">
+    {{perception}}
+  </div>
+  <div class="gameEnded" *ngIf="ended">
+    EL JUEGO HA FINALIZADO
+  </div>
+</div>

@@ -3,7 +3,13 @@
   <tbody>
     <tr>
       <td class="propertiesPanel">
-        <app-properties [height]="getHeight()" [width]="getWidth()" [arrowsInCarcaj]="getArrowsInCarcaj()"></app-properties>
+        <app-properties
+          [height]="getHeight()" 
+          [width]="getWidth()" 
+          [arrowsInCarcaj]="getArrowsInCarcaj()" 
+          [isWumpusDeath]="getWumpusDeath()" 
+          [isGoldFound]="getGoldFound()">
+        </app-properties>
       </td>
 
       <td class="gamePanel">
@@ -11,15 +17,10 @@
           <table>
             <tbody>
               <tr *ngFor="let row of board; let rowNumber=index" [attr.data-index]="rowNumber">
-                <!-- <td *ngFor="let col of row; let colNumber=index" [attr.data-index]="colNumber" class="tile" [ngClass]="{'visibleTile': getIsVisible(rowNumber, colNumber)}"> -->
                 <td *ngFor="let col of row; let colNumber=index" [attr.data-index]="colNumber" class="tile">
-                        <!-- {{rowNumber}}{{colNumber}} {{getTileImage(rowNumber, colNumber)}} {{getHasBreeze(rowNumber, colNumber)}} {{getHasStench(rowNumber, colNumber)}}/ -->
-                  <div class="tile" [ngClass]="{'visibleTile': true, 'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeathTile': getIsWumpusDeathPosition(rowNumber, colNumber), 'pitTile': getIsPitPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber)}">
+                  <div class="tile" [ngClass]="{'startPoint': getIsStartPoint(rowNumber, colNumber), 'visibleTile': true, 'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeathTile': getIsWumpusDeathPosition(rowNumber, colNumber), 'pitTile': getIsPitPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber)}">
                     <div *ngIf="hunterY === rowNumber && hunterX === colNumber">
-                      <img src="/assets/hunter-right.png" *ngIf="hunterDirection === 0">
-                      <img src="/assets/hunter-down.png" *ngIf="hunterDirection === 1">
-                      <img src="/assets/hunter-left.png" *ngIf="hunterDirection === 2">
-                      <img src="/assets/hunter-up.png" *ngIf="hunterDirection === 3">
+                      <div class="hunter" [ngClass]="{'hunterDown': hunterDirection === 1, 'hunterLeft': hunterDirection === 2, 'hunterUp': hunterDirection === 3}"></div>
                     </div>
                   </div>
                 </td>
@@ -30,9 +31,8 @@
       </td>
 
       <td class="perceptionsPanel">
-        <button type="button" class="btn btn-primary" (click)="stopGame()">Terminar</button>
-        <div class="perceptions">
-asdf sdfsd 
+        <div>
+          <app-perceptions [perceptions]="getPerceptions()" [ended]="ended" (stopGame)="stopGame()"></app-perceptions>
         </div>
       </td>
     </tr>

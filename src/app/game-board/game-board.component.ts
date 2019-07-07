@@ -95,12 +95,13 @@ export class GameBoardComponent implements OnInit {
     return this.arrowsInCarcaj;
   }
 
-  // getProperties() {
-  //   const property = new Property();
-  //   property.height = this.getHeight();
-  //   property.width = this.getWidth();
-  //   property.arrowsInCarcaj = this.arrowsInCarcaj;
-  // }
+  getProperties() {
+    const properties = new Properties();
+    properties.height = this.getHeight();
+    properties.width = this.getWidth();
+    properties.arrowsInCarcaj = this.arrowsInCarcaj;
+    console.log('getProperties:', properties);
+  }
 
   getTileImage(row: number, col: number) {
     if (this.tile(row, col).hasWumpus) {

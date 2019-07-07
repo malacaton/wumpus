@@ -8,6 +8,7 @@ import { TileComponent } from './tile/tile.component';
 import { InitialQuestionsComponent } from './initial-questions/initial-questions.component';
 import { GameComponent } from './game/game.component';
 import { GameBoardComponent } from './game-board/game-board.component';
+import { PropertiesComponent } from './properties/properties.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { GameBoardComponent } from './game-board/game-board.component';
     InitialQuestionsComponent,
     GameComponent,
     GameBoardComponent,
+    PropertiesComponent,
   ],
   imports: [
     BrowserModule,

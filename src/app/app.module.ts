@@ -15,7 +15,7 @@ import { GameBoardComponent } from './game-board/game-board.component';
     TileComponent,
     InitialQuestionsComponent,
     GameComponent,
-    GameBoardComponent
+    GameBoardComponent,
   ],
   imports: [
     BrowserModule,

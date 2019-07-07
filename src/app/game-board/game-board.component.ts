@@ -84,7 +84,7 @@ export class GameBoardComponent implements OnInit {
   }
 
   getHeight() {
-    return this.myGameParams.width;
+    return this.myGameParams.height;
   }
 
   getWidth() {
@@ -94,6 +94,13 @@ export class GameBoardComponent implements OnInit {
   getArrowsInCarcaj() {
     return this.arrowsInCarcaj;
   }
+
+  // getProperties() {
+  //   const property = new Property();
+  //   property.height = this.getHeight();
+  //   property.width = this.getWidth();
+  //   property.arrowsInCarcaj = this.arrowsInCarcaj;
+  // }
 
   getTileImage(row: number, col: number) {
     if (this.tile(row, col).hasWumpus) {

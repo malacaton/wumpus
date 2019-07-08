@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
+// game-board.component.ts
+import { Component, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
 import { GameParams } from '../../models/game-params';
 import { Tile } from '../../models/tile';
 import { Coordinates } from '../../models/coordinates';
 
+// Controles del juego
 export enum KEY_CODE {
   EXIT = 17, // ctrl
   FIRE = 32, // space
@@ -12,6 +14,7 @@ export enum KEY_CODE {
   SEND_ACTION = 13 // enter
 }
 
+// Cadenas de texto que se mostrarán durante el juego
 export enum MESSAGES {
   EATEN_BY_WUMPUS = 'Aaaag ¡Te has encontrado con el Wumpus, que se te ha zampado!',
   FALLEN_TO_WELL = 'Aaaaaa ¡PUM! ¡Has caido en un pozo!',
@@ -32,7 +35,7 @@ export enum MESSAGES {
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.scss']
 })
-export class GameBoardComponent implements OnInit {
+export class GameBoardComponent {
   // #region Properties
   board: any;
   hunterX = 0;
@@ -86,9 +89,6 @@ export class GameBoardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
 
   // #region Game functions
   startGame() {
@@ -105,17 +105,17 @@ export class GameBoardComponent implements OnInit {
       }
     }
     this.board = boardTemp.reverse();
-    this.tile(0, 0).startPoint = true; // Reservar el espacio como punto de entrada
+    this.tile(0, 0).startPoint = true; // Reserved space to start game
     this.tile(0, 0).isVisible = true;
 
     this.freeSpaces = (this.myGameParams.height * this.myGameParams.width) - 1;
     this.occupiedSpaces = new Array(this.freeSpaces);
 
-    // #region Crear posiciones aleatorias
+    // #region Define random positions
     const positions: string[] = [];
     const positionsCount = this.myGameParams.pitsCount + 2;
     while (positions.length < positionsCount) {
-      this.addPosition(positions);
+      this.addRandomPosition(positions);
     }
 
     const coords: Coordinates[] = [];
@@ -128,19 +128,19 @@ export class GameBoardComponent implements OnInit {
     });
     // #endregion
 
-    // #region Colocar elementos
+    // #region Put elements
     for (let i = 0; i < coords.length; i++) {
-      if (i === 0) {  // Colocar el oro
+      if (i === 0) {  // Put gold
         this.tile(coords[i].row, coords[i].col).hasGold = true;
-      } else if (i === 1) {  // Colocar el Wumpus
+      } else if (i === 1) {  // Put the Wumpus
         this.tile(coords[i].row, coords[i].col).hasWumpus = true;
-      } else {        // Colocar un pozo
+      } else {        // Put a pit
         this.tile(coords[i].row, coords[i].col).hasPit = true;
       }
 
-      // #region Establecer percepciones en los adyacentes
-      if (coords[i].row > 0) { // Arriba
-        if (i === 0) {  // Colocar el oro
+      // #region Put adjacent perceptions
+      if (coords[i].row > 0) { // Up
+        if (i === 0) {
           this.tile(coords[i].row - 1, coords[i].col).hasBrightness = true;
         } else if (i === 1) {
           this.tile(coords[i].row - 1, coords[i].col).hasStench = true;
@@ -148,8 +148,8 @@ export class GameBoardComponent implements OnInit {
           this.tile(coords[i].row - 1, coords[i].col).hasBreeze = true;
         }
       }
-      if (coords[i].row < this.getHeight() - 1) { // Abajo
-        if (i === 0) {  // Colocar el oro
+      if (coords[i].row < this.getHeight() - 1) { // Down
+        if (i === 0) {
           this.tile(coords[i].row + 1, coords[i].col).hasBrightness = true;
         } else if (i === 1) {
           this.tile(coords[i].row + 1, coords[i].col).hasStench = true;
@@ -157,8 +157,8 @@ export class GameBoardComponent implements OnInit {
           this.tile(coords[i].row + 1, coords[i].col).hasBreeze = true;
         }
       }
-      if (coords[i].col > 0) { // Izquierda
-        if (i === 0) {  // Colocar el oro
+      if (coords[i].col > 0) { // Left
+        if (i === 0) {
           this.tile(coords[i].row, coords[i].col - 1).hasBrightness = true;
         } else if (i === 1) {
           this.tile(coords[i].row, coords[i].col - 1).hasStench = true;
@@ -166,8 +166,8 @@ export class GameBoardComponent implements OnInit {
           this.tile(coords[i].row, coords[i].col - 1).hasBreeze = true;
         }
       }
-      if (coords[i].col < this.getWidth() - 1) { // Derecha
-        if (i === 0) {  // Colocar el oro
+      if (coords[i].col < this.getWidth() - 1) { // Right
+        if (i === 0) {
           this.tile(coords[i].row, coords[i].col + 1).hasBrightness = true;
         } else if (i === 1) {
           this.tile(coords[i].row, coords[i].col + 1).hasStench = true;
@@ -182,11 +182,8 @@ export class GameBoardComponent implements OnInit {
     this.hunterMoved();
   }
 
-  stopGame() {
-    this.endGame.emit();
-  }
-
-  addPosition(positions: string[]) {
+  // Return random position to positions[]
+  addRandomPosition(positions: string[]) {
     const row = this.getRamdomRow();
     let maxCols = this.getWidth();
     if (row === 0) {
@@ -200,23 +197,29 @@ export class GameBoardComponent implements OnInit {
     if (!positions.includes(pos)) {
       positions.push(pos);
     }
-
     return pos;
   }
 
+  stopGame() {
+    this.endGame.emit();
+  }
+
+  // Get the tile at coords
   tile(row: number, col: number) {
     return this.board[row][col];
   }
 
+  // Called when hunter was moved
   hunterMoved() {
     const tile = this.tile(this.hunterY, this.hunterX);
     tile.isVisible = true;
 
-    // Cambiar el color del oro si ya está cogido
+    // Change gold picture if has been picked
     if (this.isGoldFound && !tile.hasGold && !this.pickedGold) {
       this.pickedGold = true;
     }
 
+    // Put last messages when game has ended
     this.perceptions = [];
     if (tile.hasWumpus && !this.isWumpusIsDead) {
       this.perceptions.push(MESSAGES.EATEN_BY_WUMPUS);
@@ -238,13 +241,13 @@ export class GameBoardComponent implements OnInit {
       if (tile.hasStench && !this.isWumpusIsDead) {
         this.perceptions.push(MESSAGES.STENCH);
       }
-      if (tile.hasGold) {
+      if (tile.hasGold) { // If gold has been found
         if (!this.isGoldFound) {
           this.isGoldFound = true;
           this.perceptions.push(MESSAGES.GOLD_FOUND);
         }
 
-        // Quitar los brillos adyacentes
+        // Remove adjacent brightness
         if (this.hunterY > 0) {
           this.tile(this.hunterY - 1, this.hunterX).hasBrightness = false;
         }
@@ -269,7 +272,7 @@ export class GameBoardComponent implements OnInit {
 
 
   // #region User actions
-  sendAction() {
+  sendAction() { // Send actions when user press ENTER on the textbox
     if (!this.ended) {
       const action = this.action.trim().toUpperCase();
       console.log(action);
@@ -299,13 +302,14 @@ export class GameBoardComponent implements OnInit {
           this.exit();
           break;
 
-        default:
+        default: // If the command is unknown
           this.perceptions.push(MESSAGES.UNKNOWN);
           break;
       }
     }
   }
 
+  // #region actions to do
   turnLeft() {
     this.hunterDirection -= 1;
     if (this.hunterDirection < 0) {
@@ -460,6 +464,8 @@ export class GameBoardComponent implements OnInit {
   }
   // #endregion
 
+  // #endregion
+
   // #region Get values
   getRamdomRow() {
     const row = Math.round(Math.random() * (this.getHeight() - 1));
@@ -552,7 +558,7 @@ export class GameBoardComponent implements OnInit {
     return (this.hunterY === row && this.hunterX === col);
   }
 
-  getIsDone() {
+  getIsDone() { // Return true when the game is completed
     return this.done;
   }
   // #endregion

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+// game.component.ts
+import { Component, Input } from '@angular/core';
 import { GameParams } from '../models/game-params';
 
 @Component({
@@ -7,16 +8,13 @@ import { GameParams } from '../models/game-params';
   styleUrls: ['./game.component.scss']
 })
 
-export class GameComponent implements OnInit {
+export class GameComponent {
   // Properties
   gameParams = new GameParams();
 
   @Input() isPlaying = false;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   playGame(params: any) {
     this.isPlaying = true;

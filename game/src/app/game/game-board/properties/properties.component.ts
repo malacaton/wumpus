@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+// properties.component.ts
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-properties',
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.scss']
 })
-export class PropertiesComponent implements OnInit {
+export class PropertiesComponent {
 
   @Input() height: number;
   @Input() width: number;
@@ -17,8 +18,5 @@ export class PropertiesComponent implements OnInit {
   @Input() isWumpusIsDead = false;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

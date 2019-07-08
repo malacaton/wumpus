@@ -1,3 +1,4 @@
+// initial-questions.component.ts
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -41,6 +42,7 @@ export class InitialQuestionsComponent implements OnInit {
     }
   }
 
+  // Call to play game when the user press start button
   startGame() {
     this.playGame.emit({boardWidth: this.boardWidth, pitsCount: this.pitsCount, arrowsCount: this.arrowsCount});
   }

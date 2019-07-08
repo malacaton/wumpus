@@ -22,7 +22,7 @@ Como se trata de una prueba para Frontend, he pensado que no tenía demasiado se
 
 El proyecto está realizado con Angular 8, aunque creo que también se podría hacer sobre Angular 6 o 7. Solo tengo dudas con la técnica de captura de las teclas presionadas, ya que no recuerdo si con Angular 6 también se hacía así.
 
-El cazador percibe en las adyacentes el hedor del Wumpus, y la brisa de los pozos. He hecho también que pudiese percibir el brillo del oro para bajar la dificultad del juego, aunque esta característica está comentada ya que no se indicó en las especificaciones.
+El cazador percibe en las adyacentes el hedor del Wumpus, y la brisa de los pozos. He hecho también que pudiese percibir el brillo del oro para bajar la dificultad del juego, aunque esta característica está comentada ya que no se indicó en las especificaciones ni forma parte del juego original.
 
 El proyecto de test lo he realizado utilizando TestCafe, que solo dependende de Node, y se instala con "npm install" desde su carpeta ya que las dependencias están especificadas en su 'package.json', junto con 'testcafe-angular-selectors'. Son pruebas de aceptación, no tests unitarios, ya que no hay parte backend ni componentes independientes que podamos comprobar de forma unitaria. Los tests se hacen contra el servidor localhost:4200, que es dónde se ejecuta Angular por defecto, así que para lanzarlos, primero se debe ejecutar el proyecto 'game'  luego lanzar los tests desde otra ventana CMD o PowerShell.
 

@@ -19,5 +19,11 @@ El proyecto está realizado con Angular 8, aunque creo que también se podría h
 
 El cazador percibe en las adyacentes el hedor del Wumpus, y la brisa de los pozos. He hecho también que pudiese percibir el brillo del oro para bajar la dificultad del juego, aunque esta característica está comentada ya que no se indicó en las especificaciones.
 
-El proyecto de test lo he realizado utilizando TestCafe. Solo dependende de Node, y se instala con "npm install" desde su carpeta ya que las dependencias están especificadas en su 'package.json', junto con 'testcafe-angular-selectors' . Los tests se hacen contra el servidor localhost:4200, que es dónde se ejecuta Angular por defecto, así que para lanzarlos, primero se debe ejecutar el proyecto 'game' con 'ng s' desde CMD o PowerShell en su carpeta, y luego lanzar los tests desde otra ventana CMD o PowerShell.
+El proyecto de test lo he realizado utilizando TestCafe. Solo dependende de Node, y se instala con "npm install" desde su carpeta ya que las dependencias están especificadas en su 'package.json', junto con 'testcafe-angular-selectors' . Los tests se hacen contra el servidor localhost:4200, que es dónde se ejecuta Angular por defecto, así que para lanzarlos, primero se debe ejecutar el proyecto 'game'  luego lanzar los tests desde otra ventana CMD o PowerShell.
+
+Pasos para probar el juego:
+- Desde una ventana CMD o PowerShell, desde la carpeta '/game' del proyecto: ejecutar 'ng s -o'. Esto lanzará una ventana en el navegador predeterminado con la página del juego, localizada en http://localhost:4200
+
+Para ejecutar los test:
+- Con el juego en ejecución, desde otra ventana CMD o PowerShell en la carpeta '/test' del proyecto, ejecutar: 'npm test'. Esto lanza una ventana dónde mostrará el éxito o error en los tests, mientras que los ejecuta en una ventana del navegador que abrirá para automatizar esas tareas de testeo.
 

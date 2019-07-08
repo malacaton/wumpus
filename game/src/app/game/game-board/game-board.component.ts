@@ -19,7 +19,7 @@ export enum MESSAGES {
   BREEZE = 'Noto una brisa',
   STENCH = 'Noto un hedor',
   GOLD_FOUND = '¡BIEN! ¡He encontrado el oro!',
-  NOT_ACCOMPLISHED = 'No puedes salir porque no has cumplido los objetivos',
+  NOT_ACCOMPLISHED = 'No puedes salir porque no has encontrado el oro',
   CARCAJ_IS_EMPTY = 'No te quedan flechas en el carcaj',
   ARROW_HIT_THE_WALL = '¡CLONK! La flecha ha chocado contra la pared',
   KILLED_THE_WUMPUS = '¡Muy bien¡ ¡Has matado al Wumpus!',
@@ -397,7 +397,7 @@ export class GameBoardComponent implements OnInit {
 
   exit() {
     if (this.hunterY === 0 && this.hunterX === 0) {
-      if (this.isWumpusIsDead && this.isGoldFound) {
+      if (this.isGoldFound) {
         this.done = true;
         this.ended = true;
       } else {

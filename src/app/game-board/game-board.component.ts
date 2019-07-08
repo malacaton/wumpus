@@ -15,9 +15,15 @@ export enum KEY_CODE {
 export enum MESSAGES {
   EATEN_BY_WUMPUS = 'Aaaag ¡Te has encontrado con el Wumpus, que se te ha zampado!',
   FALLEN_TO_WELL = 'Aaaaaa ¡PUM! ¡Has caido en un pozo!',
-  WALK = 87, // w
-  TURN_LEFT = 65, // a
-  TURN_RIGHT = 68 // d
+  BRIGHTNESS = 'Noto un brillo',
+  BREEZE = 'Noto una brisa',
+  STENCH = 'Noto un hedor',
+  GOLD_FOUND = '¡BIEN! ¡He encontrado el oro!',
+  NOT_ACCOMPLISHED = 'No puedes salir porque no has cumplido los objetivos',
+  CARCAJ_IS_EMPTY = 'No te quedan flechas en el carcaj',
+  ARROW_HIT_THE_WALL = '¡CLONK! La flecha ha chocado contra la pared',
+  KILLED_THE_WUMPUS = '¡Muy bien¡ ¡Has matado al Wumpus!',
+  HIT_THE_WALL = 'Has chocado contra el muro'
 }
 
 @Component({
@@ -218,18 +224,18 @@ export class GameBoardComponent implements OnInit {
 
     if (!this.ended) {
       if (tile.hasBrightness) {
-        this.perceptions.push('Noto un brillo');
+        this.perceptions.push(MESSAGES.BRIGHTNESS);
       }
       if (tile.hasBreeze) {
-        this.perceptions.push('Noto una brisa');
+        this.perceptions.push(MESSAGES.BREEZE);
       }
       if (tile.hasStench && !this.isWumpusIsDead) {
-        this.perceptions.push('Noto un hedor');
+        this.perceptions.push(MESSAGES.STENCH);
       }
       if (tile.hasGold) {
         if (!this.isGoldFound) {
           this.isGoldFound = true;
-          this.perceptions.push('¡BIEN! ¡He encontrado el oro!');
+          this.perceptions.push(MESSAGES.GOLD_FOUND);
         }
 
         // Quitar los brillos adyacentes
@@ -248,7 +254,7 @@ export class GameBoardComponent implements OnInit {
       }
 
       if (this.tryingToLeave) {
-        this.perceptions.push('No puedes salir porque no has cumplido los objetivos');
+        this.perceptions.push(MESSAGES.NOT_ACCOMPLISHED);
         this.tryingToLeave = false;
       }
     }
@@ -279,7 +285,7 @@ export class GameBoardComponent implements OnInit {
     // this.tryingToLeave = false;
 
     if (this.arrowsInCarcaj === 0) {
-      this.perceptions.push('No te quedan flechas en el carcaj');
+      this.perceptions.push(MESSAGES.CARCAJ_IS_EMPTY);
     } else {
       this.arrowsInCarcaj -= 1;
       let y = this.hunterY;
@@ -340,14 +346,14 @@ export class GameBoardComponent implements OnInit {
       }
 
       if (hitWall) {
-        this.perceptions.push('¡CLONK! La flecha ha chocado contra la pared');
+        this.perceptions.push(MESSAGES.ARROW_HIT_THE_WALL);
       }
 
       if (hitWumpus) {
         tile.isWumpusDead = true;
         tile.isWumpusDead = true;
         this.isWumpusIsDead = true;
-        this.perceptions.push('¡Muy bien¡ ¡Has matado al Wumpus!');
+        this.perceptions.push(MESSAGES.KILLED_THE_WUMPUS);
       }
     }
   }
@@ -414,7 +420,7 @@ export class GameBoardComponent implements OnInit {
     this.hunterX = newX;
     this.hunterMoved();
     if (wall) {
-      this.perceptions.push('HAS CHOCADO CONTRA EL MURO');
+      this.perceptions.push(MESSAGES.HIT_THE_WALL);
     }
   }
   // #endregion

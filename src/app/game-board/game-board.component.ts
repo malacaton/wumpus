@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListen
 import { GameParams } from '../models/game-params';
 import { Tile } from '../models/tile';
 import { Coordinates } from '../models/coordinates';
-import { ThrowStmt } from '@angular/compiler';
 
 export enum KEY_CODE {
   FIRE = 13, // enter
@@ -442,6 +441,14 @@ export class GameBoardComponent implements OnInit {
 
   getWidth() {
     return this.myGameParams.width;
+  }
+
+  getHunterY() {
+    return this.hunterY;
+  }
+
+  getHunterX() {
+    return this.hunterX;
   }
 
   getArrowsInCarcaj() {

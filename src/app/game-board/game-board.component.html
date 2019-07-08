@@ -15,8 +15,11 @@
           [width]="getWidth()" 
           [arrowsInCarcaj]="getArrowsInCarcaj()" 
           [isWumpusIsDead]="getWumpusIsDead()"
+          [isGoldFound]="getGoldFound()"
           [steps]="getSteps()"
-          [isGoldFound]="getGoldFound()">
+          [hunterY]="getHunterY()"
+          [hunterX]="getHunterX()"
+        >
         </app-properties>
       </td>
 
@@ -25,7 +28,7 @@
           <table>
             <tbody>
               <tr *ngFor="let row of board; let rowNumber=index" [attr.data-index]="rowNumber">
-                <td *ngFor="let col of row; let colNumber=index" [attr.data-index]="colNumber" class="tile">
+                <td *ngFor="let col of row; let colNumber=index" [attr.data-index]="colNumber" class="cell">
                   <div class="tile" [ngClass]="{'startPoint': getIsStartPoint(rowNumber, colNumber), 'visibleTile': getIsVisible(rowNumber, colNumber), 'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeadTile': getIsWumpusDeadPosition(rowNumber, colNumber), 'wellTile': getIsWellPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber), 'pickedGoldTile': getIsPickedGoldPosition(rowNumber, colNumber)}">
                     <div *ngIf="hunterY === rowNumber && hunterX === colNumber">
                       <div class="hunter" [ngClass]="{'hunterDown': hunterDirection === 1, 'hunterLeft': hunterDirection === 2, 'hunterUp': hunterDirection === 3}"></div>

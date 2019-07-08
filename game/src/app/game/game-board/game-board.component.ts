@@ -4,8 +4,8 @@ import { Tile } from '../../models/tile';
 import { Coordinates } from '../../models/coordinates';
 
 export enum KEY_CODE {
-  FIRE = 17, // ctrl
-  EXIT = 32, // space
+  EXIT = 17, // ctrl
+  FIRE = 32, // space
   WALK = 38, // up arrow
   TURN_LEFT = 37, // left arrow
   TURN_RIGHT = 39, // right arrow
@@ -113,7 +113,7 @@ export class GameBoardComponent implements OnInit {
 
     // #region Crear posiciones aleatorias
     const positions: string[] = [];
-    const positionsCount = this.myGameParams.wellsCount + 2;
+    const positionsCount = this.myGameParams.pitsCount + 2;
     while (positions.length < positionsCount) {
       this.addPosition(positions);
     }
@@ -135,7 +135,7 @@ export class GameBoardComponent implements OnInit {
       } else if (i === 1) {  // Colocar el Wumpus
         this.tile(coords[i].row, coords[i].col).hasWumpus = true;
       } else {        // Colocar un pozo
-        this.tile(coords[i].row, coords[i].col).hasWell = true;
+        this.tile(coords[i].row, coords[i].col).hasPit = true;
       }
 
       // #region Establecer percepciones en los adyacentes
@@ -221,7 +221,7 @@ export class GameBoardComponent implements OnInit {
     if (tile.hasWumpus && !this.isWumpusIsDead) {
       this.perceptions.push(MESSAGES.EATEN_BY_WUMPUS);
       this.ended = true;
-    } else if (tile.hasWell) {
+    } else if (tile.hasPit) {
       this.perceptions.push(MESSAGES.FALLEN_TO_WELL);
       this.ended = true;
     }
@@ -270,37 +270,39 @@ export class GameBoardComponent implements OnInit {
 
   // #region User actions
   sendAction() {
-    const action = this.action.trim().toUpperCase();
-    console.log(action);
-    switch (action) {
-      case 'L':
-        this.action = '';
-        this.turnLeft();
-        break;
+    if (!this.ended) {
+      const action = this.action.trim().toUpperCase();
+      console.log(action);
+      switch (action) {
+        case 'L':
+          this.action = '';
+          this.turnLeft();
+          break;
 
-      case 'R':
-        this.action = '';
-        this.turnRight();
-        break;
+        case 'R':
+          this.action = '';
+          this.turnRight();
+          break;
 
-      case 'W':
-        this.action = '';
-        this.walk();
-        break;
+        case 'W':
+          this.action = '';
+          this.walk();
+          break;
 
-      case 'F':
-        this.action = '';
-        this.fire();
-        break;
+        case 'F':
+          this.action = '';
+          this.fire();
+          break;
 
-      case 'X':
-        this.action = '';
-        this.exit();
-        break;
+        case 'X':
+          this.action = '';
+          this.exit();
+          break;
 
-      default:
-        this.perceptions.push(MESSAGES.UNKNOWN);
-        break;
+        default:
+          this.perceptions.push(MESSAGES.UNKNOWN);
+          break;
+      }
     }
   }
 
@@ -541,9 +543,9 @@ export class GameBoardComponent implements OnInit {
     return (tile.hasWumpus && this.tile(row, col).isWumpusDead) && tile.isVisible;
   }
 
-  getIsWellPosition(row: number, col: number) {
+  getIsPitPosition(row: number, col: number) {
     const tile = this.tile(row, col);
-    return (tile.hasWell) && tile.isVisible;
+    return (tile.hasPit) && tile.isVisible;
   }
 
   getIsHunterPosition(row: number, col: number) {

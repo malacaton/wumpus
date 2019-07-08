@@ -5,7 +5,7 @@ export class StartGame {
     const initialQuestions = AngularSelector('app-initial-questions');
 
     this.heightWidth = initialQuestions.find('#height-width');
-    this.wellsCount = initialQuestions.find('#wells-count');
+    this.pitsCount = initialQuestions.find('#pits-count');
     this.arrowsCount = initialQuestions.find('#arrows-count');
     this.startButton = initialQuestions.find('#start-game-button');
   }

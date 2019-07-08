@@ -17,8 +17,8 @@ Como se trata de una prueba para Frontend, he pensado que no tenía demasiado se
 - L giro a la izquierda 90º (de Left, o se puede usar la flecha izquierda)
 - R, giro a la derecha 90º (de Right, o se puede usar la flecha derecha)
 - W, andar (de Walk, o se puede usar la flecha hacia arriba)
-- F, disparar (de Fire, o se puede usar CTRL)
-- X, salir (de eXit, o se puede usar también la barra espaciadora)
+- F, disparar (de Fire, o se puede usar la barra espaciadora)
+- X, salir (de eXit, o se puede usar también CTRL)
 
 El proyecto está realizado con Angular 8, aunque creo que también se podría hacer sobre Angular 6 o 7. Solo tengo dudas con la técnica de captura de las teclas presionadas, ya que no recuerdo si con Angular 6 también se hacía así.
 

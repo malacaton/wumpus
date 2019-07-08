@@ -27,13 +27,13 @@
         <div>
           <div class="action">
             <input type="text" id="action" [(ngModel)]="action" placeholder="Inserte comando y pulse ENTER">
-            <button type="button" id="sendAction" class="btn btn-primary" (click)="sendAction()">Enviar</button>
+            &nbsp;<button type="button" id="sendAction" class="btn btn-primary" (click)="sendAction()">Enviar</button>
           </div>
           <table>
             <tbody>
               <tr *ngFor="let row of board; let rowNumber=index" [attr.data-index]="rowNumber">
                 <td *ngFor="let col of row; let colNumber=index" [attr.data-index]="colNumber" class="cell">
-                  <div class="tile" [ngClass]="{'startPoint': getIsStartPoint(rowNumber, colNumber), 'visibleTile': getIsVisible(rowNumber, colNumber), 'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeadTile': getIsWumpusDeadPosition(rowNumber, colNumber), 'wellTile': getIsWellPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber), 'pickedGoldTile': getIsPickedGoldPosition(rowNumber, colNumber)}">
+                  <div class="tile" [ngClass]="{'startPoint': getIsStartPoint(rowNumber, colNumber), 'visibleTile': getIsVisible(rowNumber, colNumber), 'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeadTile': getIsWumpusDeadPosition(rowNumber, colNumber), 'pitTile': getIsPitPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber), 'pickedGoldTile': getIsPickedGoldPosition(rowNumber, colNumber)}">
                     <div *ngIf="getIsStartPoint(rowNumber, colNumber)" id="startPoint" class="exit">
                       SALIDA
                     </div>

@@ -23,7 +23,7 @@ export class GameComponent implements OnInit {
     this.gameParams = new GameParams();
     this.gameParams.width = params.boardWidth;
     this.gameParams.height = params.boardWidth;
-    this.gameParams.wellsCount = params.wellsCount;
+    this.gameParams.pitsCount = params.pitsCount;
     this.gameParams.arrowsCount = params.arrowsCount;
   }
 

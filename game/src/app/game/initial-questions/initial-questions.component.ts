@@ -9,7 +9,7 @@ export class InitialQuestionsComponent implements OnInit {
   // Properties
   boardWidth: number;
   totalCells: number;
-  wellsCount: number;
+  pitsCount: number;
   arrowsCount: number;
 
   // Events
@@ -24,24 +24,24 @@ export class InitialQuestionsComponent implements OnInit {
   restartBoard() {
     this.boardWidth = 4;
     this.totalCells = this.boardWidth * this.boardWidth;
-    this.wellsCount = 1;
+    this.pitsCount = 1;
     this.arrowsCount = 3;
   }
 
   onBoardWithChange() {
     this.totalCells = this.boardWidth * this.boardWidth;
-    this.onWellsCountChange();
+    this.onPitsCountChange();
   }
 
-  onWellsCountChange() {
-    if (this.wellsCount < 0) {
-      this.wellsCount = 0;
-    } else if (this.wellsCount > (this.totalCells - 3)) {
-      this.wellsCount = this.totalCells - 3;
+  onPitsCountChange() {
+    if (this.pitsCount < 0) {
+      this.pitsCount = 0;
+    } else if (this.pitsCount > (this.totalCells - 3)) {
+      this.pitsCount = this.totalCells - 3;
     }
   }
 
   startGame() {
-    this.playGame.emit({boardWidth: this.boardWidth, wellsCount: this.wellsCount, arrowsCount: this.arrowsCount});
+    this.playGame.emit({boardWidth: this.boardWidth, pitsCount: this.pitsCount, arrowsCount: this.arrowsCount});
   }
 }

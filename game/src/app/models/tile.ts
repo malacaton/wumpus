@@ -5,7 +5,7 @@ export class Tile {
   hasBreeze = false;
   hasStench = false;
   hasBrightness = false;
-  hasWell = false;
+  hasPit = false;
   hasGold = false;
   hasWumpus = false;
   isWumpusDead = false;

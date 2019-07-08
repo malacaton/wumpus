@@ -9,4 +9,4 @@ export class StartGame {
     this.arrowsCount = initialQuestions.find('#arrows-count');
     this.startButton = initialQuestions.find('#start-game-button');
   }
-};
+}

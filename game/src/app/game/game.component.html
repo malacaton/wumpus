@@ -1,2 +1,3 @@
+<div id="zone" class="zone">{{getZone()}}</div>
 <app-initial-questions *ngIf="!isPlaying" (playGame)="playGame($event)"></app-initial-questions>
 <app-game-board *ngIf="isPlaying" [gameParams]="gameParams" (endGame)="endGame()"></app-game-board>

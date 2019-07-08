@@ -25,6 +25,9 @@
 
       <td class="gamePanel">
         <div>
+          <div class="action">
+            <input type="text" id="action" [(ngModel)]="action" placeholder="Inserte comando y pulse ENTER">
+          </div>
           <table>
             <tbody>
               <tr *ngFor="let row of board; let rowNumber=index" [attr.data-index]="rowNumber">

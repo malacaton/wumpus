@@ -30,4 +30,12 @@ export class GameComponent implements OnInit {
   endGame() {
     this.isPlaying = false;
   }
+
+  getZone() {
+    if (this.isPlaying) {
+      return 'Panel de juego';
+    } else {
+      return 'Parámetros del juego';
+    }
+  }
 }

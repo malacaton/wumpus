@@ -4,11 +4,12 @@ import { Tile } from '../../models/tile';
 import { Coordinates } from '../../models/coordinates';
 
 export enum KEY_CODE {
-  FIRE = 13, // enter
+  FIRE = 17, // ctrl
   EXIT = 32, // space
   WALK = 38, // up arrow
   TURN_LEFT = 37, // left arrow
-  TURN_RIGHT = 39 // right arrow
+  TURN_RIGHT = 39, // right arrow
+  SEND_ACTION = 13 // enter
 }
 
 export enum MESSAGES {
@@ -22,7 +23,8 @@ export enum MESSAGES {
   CARCAJ_IS_EMPTY = 'No te quedan flechas en el carcaj',
   ARROW_HIT_THE_WALL = '¡CLONK! La flecha ha chocado contra la pared',
   KILLED_THE_WUMPUS = '¡Muy bien¡ ¡Has matado al Wumpus!',
-  HIT_THE_WALL = 'Has chocado contra el muro'
+  HIT_THE_WALL = 'Has chocado contra el muro',
+  UNKNOWN = 'No entiendo lo que me dices'
 }
 
 @Component({
@@ -40,6 +42,7 @@ export class GameBoardComponent implements OnInit {
   occupiedSpaces = [];
   hunterDirection = 0;
   perceptions: string[];
+  action = '';
   isWumpusIsDead = false;
   isGoldFound = false;
   pickedGold = false;
@@ -73,6 +76,8 @@ export class GameBoardComponent implements OnInit {
         this.turnLeft();
       } else if (event.keyCode === KEY_CODE.TURN_RIGHT) {
         this.turnRight();
+      } else if (event.keyCode === KEY_CODE.SEND_ACTION) {
+        this.sendAction();
       }
     }
   }
@@ -264,9 +269,42 @@ export class GameBoardComponent implements OnInit {
 
 
   // #region User actions
-  turnLeft() {
-    // this.tryingToLeave = false;
+  sendAction() {
+    const action = this.action.trim().toUpperCase();
+    console.log(action);
+    switch (action) {
+      case 'L':
+        this.action = '';
+        this.turnLeft();
+        break;
 
+      case 'R':
+        this.action = '';
+        this.turnRight();
+        break;
+
+      case 'W':
+        this.action = '';
+        this.walk();
+        break;
+
+      case 'F':
+        this.action = '';
+        this.fire();
+        break;
+
+      case 'X':
+        this.action = '';
+        this.exit();
+        break;
+
+      default:
+        this.perceptions.push(MESSAGES.UNKNOWN);
+        break;
+    }
+  }
+
+  turnLeft() {
     this.hunterDirection -= 1;
     if (this.hunterDirection < 0) {
       this.hunterDirection = 3;
@@ -274,8 +312,6 @@ export class GameBoardComponent implements OnInit {
   }
 
   turnRight() {
-    // this.tryingToLeave = false;
-
     this.hunterDirection += 1;
     if (this.hunterDirection > 3) {
       this.hunterDirection = 0;
@@ -283,8 +319,6 @@ export class GameBoardComponent implements OnInit {
   }
 
   fire() {
-    // this.tryingToLeave = false;
-
     if (this.arrowsInCarcaj === 0) {
       this.perceptions.push(MESSAGES.CARCAJ_IS_EMPTY);
     } else {
@@ -372,8 +406,6 @@ export class GameBoardComponent implements OnInit {
   }
 
   walk() {
-    // this.tryingToLeave = false;
-
     let wall = false;
     let newY = this.hunterY;
     let newX = this.hunterX;

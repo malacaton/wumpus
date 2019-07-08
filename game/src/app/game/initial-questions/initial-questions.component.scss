@@ -4,4 +4,8 @@
 
 .instructions {
   margin-top: 25px;
+
+  > thead > tr > th, > tbody > tr > td {
+    padding-right: 15px; 
+  }
 }

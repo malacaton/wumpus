@@ -1,3 +1,19 @@
+.done {
+  position: absolute;
+  width: 300px;
+  height: 150px;
+  top: calc(50% - 75px);
+  left: calc(50% - 150px);
+  background-color: burlywood;
+  display: flex;
+  align-items: center;
+
+  div {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 .tableBoard {
   width: 100%;
 }
@@ -12,6 +28,7 @@
 .gamePanel {
   padding: 5px;
   min-width: 50vh;
+  vertical-align: top;
 
   div {
     text-align: -webkit-center;
@@ -44,16 +61,20 @@
   background-image: url('/assets/wumpus.png');
 }
 
-.wumpusDeathTile {
+.wumpusDeadTile {
   background-image: url('/assets/wumpus-death.png');
 }
 
-.pitTile {
-  background-image: url('/assets/pit.png');
+.wellTile {
+  background-image: url('/assets/well.png');
 }
 
 .goldTile {
   background-image: url('/assets/gold.png');
+}
+
+.pickedGoldTile {
+  background-image: url('/assets/gold-picked.png');
 }
 
 .hunter {

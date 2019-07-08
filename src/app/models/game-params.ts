@@ -2,6 +2,6 @@
 export class GameParams {
   width = 4;
   height = 4;
-  pitsCount = 3;
+  wellsCount = 3;
   arrowsCount = 3;
 }

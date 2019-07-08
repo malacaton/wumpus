@@ -6,7 +6,16 @@ import { ThrowStmt } from '@angular/compiler';
 
 export enum KEY_CODE {
   FIRE = 13, // enter
-  WALK = 32, // space
+  EXIT = 32, // space
+  WALK = 87, // w
+  TURN_LEFT = 65, // a
+  TURN_RIGHT = 68 // d
+}
+
+export enum MESSAGES {
+  EATEN_BY_WUMPUS = 'Aaaag ¡Te has encontrado con el Wumpus, que se te ha zampado!',
+  FALLEN_TO_WELL = 'Aaaaaa ¡PUM! ¡Has caido en un pozo!',
+  WALK = 87, // w
   TURN_LEFT = 65, // a
   TURN_RIGHT = 68 // d
 }
@@ -26,9 +35,13 @@ export class GameBoardComponent implements OnInit {
   occupiedSpaces = [];
   hunterDirection = 0;
   perceptions: string[];
-  isWumpusDeath = false;
+  isWumpusIsDead = false;
   isGoldFound = false;
+  pickedGold = false;
   ended = false;
+  tryingToLeave = false;
+  steps = 0;
+  done = false;
 
   myGameParams: GameParams;
   @Input('gameParams')
@@ -49,6 +62,8 @@ export class GameBoardComponent implements OnInit {
         this.fire();
       } else if (event.keyCode === KEY_CODE.WALK) {
         this.walk();
+      } else if (event.keyCode === KEY_CODE.EXIT) {
+        this.exit();
       } else if (event.keyCode === KEY_CODE.TURN_LEFT) {
         this.turnLeft();
       } else if (event.keyCode === KEY_CODE.TURN_RIGHT) {
@@ -88,7 +103,7 @@ export class GameBoardComponent implements OnInit {
 
     // #region Crear posiciones aleatorias
     const positions: string[] = [];
-    const positionsCount = this.myGameParams.pitsCount + 2;
+    const positionsCount = this.myGameParams.wellsCount + 2;
     while (positions.length < positionsCount) {
       this.addPosition(positions);
     }
@@ -110,7 +125,7 @@ export class GameBoardComponent implements OnInit {
       } else if (i === 1) {  // Colocar el Wumpus
         this.tile(coords[i].row, coords[i].col).hasWumpus = true;
       } else {        // Colocar un pozo
-        this.tile(coords[i].row, coords[i].col).hasPit = true;
+        this.tile(coords[i].row, coords[i].col).hasWell = true;
       }
 
       // #region Establecer percepciones en los adyacentes
@@ -185,13 +200,19 @@ export class GameBoardComponent implements OnInit {
 
   hunterMoved() {
     const tile = this.tile(this.hunterY, this.hunterX);
+    tile.isVisible = true;
+
+    // Cambiar el color del oro si ya está cogido
+    if (this.isGoldFound && !tile.hasGold && !this.pickedGold) {
+      this.pickedGold = true;
+    }
 
     this.perceptions = [];
-    if (tile.hasWumpus) {
-      this.perceptions.push('Aaaag ¡Te has encontrado con el Wumpus, que se te ha zampado!');
+    if (tile.hasWumpus && !this.isWumpusIsDead) {
+      this.perceptions.push(MESSAGES.EATEN_BY_WUMPUS);
       this.ended = true;
-    } else if (tile.hasPit) {
-      this.perceptions.push('Aaaaaa ¡PUM! ¡Has caido en un pozo!');
+    } else if (tile.hasWell) {
+      this.perceptions.push(MESSAGES.FALLEN_TO_WELL);
       this.ended = true;
     }
 
@@ -202,14 +223,14 @@ export class GameBoardComponent implements OnInit {
       if (tile.hasBreeze) {
         this.perceptions.push('Noto una brisa');
       }
-      if (tile.hasStench) {
+      if (tile.hasStench && !this.isWumpusIsDead) {
         this.perceptions.push('Noto un hedor');
       }
       if (tile.hasGold) {
         if (!this.isGoldFound) {
+          this.isGoldFound = true;
           this.perceptions.push('¡BIEN! ¡He encontrado el oro!');
         }
-        this.isGoldFound = true;
 
         // Quitar los brillos adyacentes
         if (this.hunterY > 0) {
@@ -225,6 +246,11 @@ export class GameBoardComponent implements OnInit {
           this.tile(this.hunterY, this.hunterX + 1).hasBrightness = false;
         }
       }
+
+      if (this.tryingToLeave) {
+        this.perceptions.push('No puedes salir porque no has cumplido los objetivos');
+        this.tryingToLeave = false;
+      }
     }
   }
   // #endregion
@@ -232,6 +258,8 @@ export class GameBoardComponent implements OnInit {
 
   // #region User actions
   turnLeft() {
+    // this.tryingToLeave = false;
+
     this.hunterDirection -= 1;
     if (this.hunterDirection < 0) {
       this.hunterDirection = 3;
@@ -239,6 +267,8 @@ export class GameBoardComponent implements OnInit {
   }
 
   turnRight() {
+    // this.tryingToLeave = false;
+
     this.hunterDirection += 1;
     if (this.hunterDirection > 3) {
       this.hunterDirection = 0;
@@ -246,10 +276,97 @@ export class GameBoardComponent implements OnInit {
   }
 
   fire() {
-    console.log('Fire');
+    // this.tryingToLeave = false;
+
+    if (this.arrowsInCarcaj === 0) {
+      this.perceptions.push('No te quedan flechas en el carcaj');
+    } else {
+      this.arrowsInCarcaj -= 1;
+      let y = this.hunterY;
+      let x = this.hunterX;
+      let hitWall = false;
+      let hitWumpus = false;
+      let tile = this.tile(y, x);
+      while (true) {
+        if (this.hunterDirection === 0) {
+          x += 1;
+          if (x === this.getWidth()) {
+            hitWall = true;
+            break;
+          } else {
+            tile = this.tile(y, x);
+            if (tile.hasWumpus) {
+              hitWumpus = true;
+              break;
+            }
+          }
+        } else if (this.hunterDirection === 1) {
+          y += 1;
+          if (y === this.getHeight()) {
+            hitWall = true;
+            break;
+          } else {
+            tile = this.tile(y, x);
+            if (tile.hasWumpus) {
+              hitWumpus = true;
+              break;
+            }
+          }
+        } else if (this.hunterDirection === 2) {
+          x -= 1;
+          if (x < 0) {
+            hitWall = true;
+            break;
+          } else {
+            tile = this.tile(y, x);
+            if (tile.hasWumpus) {
+              hitWumpus = true;
+              break;
+            }
+          }
+        } else if (this.hunterDirection === 3) {
+          y -= 1;
+          if (y < 0) {
+            hitWall = true;
+            break;
+          } else {
+            tile = this.tile(y, x);
+            if (tile.hasWumpus) {
+              hitWumpus = true;
+              break;
+            }
+          }
+        }
+      }
+
+      if (hitWall) {
+        this.perceptions.push('¡CLONK! La flecha ha chocado contra la pared');
+      }
+
+      if (hitWumpus) {
+        tile.isWumpusDead = true;
+        tile.isWumpusDead = true;
+        this.isWumpusIsDead = true;
+        this.perceptions.push('¡Muy bien¡ ¡Has matado al Wumpus!');
+      }
+    }
+  }
+
+  exit() {
+    if (this.hunterY === 0 && this.hunterX === 0) {
+      if (this.isWumpusIsDead && this.isGoldFound) {
+        this.done = true;
+        this.ended = true;
+      } else {
+        this.tryingToLeave = true;
+        this.hunterMoved();
+      }
+    }
   }
 
   walk() {
+    // this.tryingToLeave = false;
+
     let wall = false;
     let newY = this.hunterY;
     let newX = this.hunterX;
@@ -260,6 +377,8 @@ export class GameBoardComponent implements OnInit {
         if (newY > this.getHeight() - 1) {
           newY = this.hunterY;
           wall = true;
+        } else {
+          this.steps += 1;
         }
         break;
       case 2:
@@ -267,6 +386,8 @@ export class GameBoardComponent implements OnInit {
         if (newX < 0) {
           newX = this.hunterX;
           wall = true;
+        } else {
+          this.steps += 1;
         }
         break;
       case 3:
@@ -274,6 +395,8 @@ export class GameBoardComponent implements OnInit {
         if (newY < 0) {
           newY = this.hunterY;
           wall = true;
+        } else {
+          this.steps += 1;
         }
         break;
       default:
@@ -281,6 +404,8 @@ export class GameBoardComponent implements OnInit {
         if (newX > this.getWidth() - 1) {
           newX = this.hunterX;
           wall = true;
+        } else {
+          this.steps += 1;
         }
         break;
     }
@@ -321,12 +446,16 @@ export class GameBoardComponent implements OnInit {
     return this.perceptions;
   }
 
-  getWumpusDeath() {
-    return this.isWumpusDeath;
+  getWumpusIsDead() {
+    return this.isWumpusIsDead;
   }
 
   getGoldFound() {
     return this.isGoldFound;
+  }
+
+  getSteps() {
+    return this.steps;
   }
 
   getHasBreeze(row: number, col: number) {
@@ -342,27 +471,40 @@ export class GameBoardComponent implements OnInit {
   }
 
   getIsVisible(row: number, col: number) {
-    return !(this.hunterY === 0 && this.hunterX === 0) && this.tile(row, col).isVisible;
+    return (row === 0 && col === 0) || this.tile(row, col).isVisible;
   }
 
   getIsGoldPosition(row: number, col: number) {
-    return this.tile(row, col).hasGold;
+    const tile = this.tile(row, col);
+    return (tile.hasGold && !this.pickedGold) && tile.isVisible;
+  }
+
+  getIsPickedGoldPosition(row: number, col: number) {
+    const tile = this.tile(row, col);
+    return (tile.hasGold && this.pickedGold) && tile.isVisible;
   }
 
   getIsWumpusPosition(row: number, col: number) {
-    return this.tile(row, col).hasWumpus && !this.tile(row, col).isWumpusDead;
+    const tile = this.tile(row, col);
+    return (tile.hasWumpus && !tile.isWumpusDead) && tile.isVisible;
   }
 
-  getIsWumpusDeathPosition(row: number, col: number) {
-    return this.tile(row, col).hasWumpus && this.tile(row, col).isWumpusDead;
+  getIsWumpusDeadPosition(row: number, col: number) {
+    const tile = this.tile(row, col);
+    return (tile.hasWumpus && this.tile(row, col).isWumpusDead) && tile.isVisible;
   }
 
-  getIsPitPosition(row: number, col: number) {
-    return this.tile(row, col).hasPit;
+  getIsWellPosition(row: number, col: number) {
+    const tile = this.tile(row, col);
+    return (tile.hasWell) && tile.isVisible;
   }
 
   getIsHunterPosition(row: number, col: number) {
     return (this.hunterY === row && this.hunterX === col);
+  }
+
+  getIsDone() {
+    return this.done;
   }
   // #endregion
 }

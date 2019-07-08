@@ -1,3 +1,10 @@
+<div class="done" *ngIf="getIsDone()">
+  <div>
+    OBJETIVO CUMPLIDO<br>
+    en {{getSteps()}} movimientos<br><br>
+    <button type="button" class="btn btn-primary" (click)="stopGame()">Aceptar</button>
+  </div>
+</div>
 
 <table class="tableBoard">
   <tbody>
@@ -7,7 +14,8 @@
           [height]="getHeight()" 
           [width]="getWidth()" 
           [arrowsInCarcaj]="getArrowsInCarcaj()" 
-          [isWumpusDeath]="getWumpusDeath()" 
+          [isWumpusIsDead]="getWumpusIsDead()"
+          [steps]="getSteps()"
           [isGoldFound]="getGoldFound()">
         </app-properties>
       </td>
@@ -18,7 +26,7 @@
             <tbody>
               <tr *ngFor="let row of board; let rowNumber=index" [attr.data-index]="rowNumber">
                 <td *ngFor="let col of row; let colNumber=index" [attr.data-index]="colNumber" class="tile">
-                  <div class="tile" [ngClass]="{'startPoint': getIsStartPoint(rowNumber, colNumber), 'visibleTile': true, 'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeathTile': getIsWumpusDeathPosition(rowNumber, colNumber), 'pitTile': getIsPitPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber)}">
+                  <div class="tile" [ngClass]="{'startPoint': getIsStartPoint(rowNumber, colNumber), 'visibleTile': getIsVisible(rowNumber, colNumber), 'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeadTile': getIsWumpusDeadPosition(rowNumber, colNumber), 'wellTile': getIsWellPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber), 'pickedGoldTile': getIsPickedGoldPosition(rowNumber, colNumber)}">
                     <div *ngIf="hunterY === rowNumber && hunterX === colNumber">
                       <div class="hunter" [ngClass]="{'hunterDown': hunterDirection === 1, 'hunterLeft': hunterDirection === 2, 'hunterUp': hunterDirection === 3}"></div>
                     </div>

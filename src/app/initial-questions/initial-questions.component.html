@@ -16,7 +16,7 @@
           Nº de pozos (Máximo {{totalCells - 3}})
       </td>
       <td class="cell">
-          <input type="number" min="0" class="form-control" [(ngModel)]="pitsCount" (change)="onPitsCountChange()">
+          <input type="number" min="0" class="form-control" [(ngModel)]="wellsCount" (change)="onWellsCountChange()">
       </td>
       <td class="cell">
           &nbsp;
@@ -35,3 +35,19 @@
     </tr>
   </tbody>
 </table>
+<div class="instructions cell">
+  <p>
+    El objetivo del juego es coger el oro, cazar al Wumpus con una flecha y salir de la mina, evitando caer 
+    en los pozos o en la cueva del Wumpus antes de haberlo matado, todo en el menor número de movimientos que
+    te sea posible (solo se tienen en cuenta los pasos 'efectivos' que das, no aquellos en los que chocas
+    contra un muro ni los cambios de dirección que hagas)
+  </p>
+  <p>
+    Teclas:<br>
+    A: Giro de 90º a la izquierda<br>
+    D: Giro de 90º a la derecha<br>
+    W: Paso hacia adelante<br>
+    ENTER: Disparar una flechas<br>
+    SPACE: Salir de la mina
+  </p>
+</div>

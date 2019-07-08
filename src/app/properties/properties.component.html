@@ -13,12 +13,19 @@
         <td class="propertyValue">{{arrowsInCarcaj}}</td>
       </tr>
       <tr class="propertyName">
+        <div class="withSeparator">
+          <td class="propertyName bold">Movimientos:</td>
+          <td class="propertyValue">{{steps}}</td>
+        </div>
+      </tr>
+      <tr class="propertyName">
         <td class="propertyName" style="column-span: all;">
-            <div class="accomplished">
-              <div *ngIf="isGoldFound">- Tienes el oro</div>
-              <div *ngIf="isWumpusDeath">- Wumpus muerto</div>
-            </div>
-          </td>
+          <div class="withSeparator">
+            <div *ngIf="isGoldFound" class="italic">- Tienes el oro</div>
+            <div *ngIf="isWumpusIsDead" class="italic">- Wumpus muerto</div>
+            <div *ngIf="isGoldFound && isWumpusIsDead" class="goToExit">- Sal de la mina</div>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

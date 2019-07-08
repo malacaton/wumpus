@@ -19,12 +19,11 @@ export class GameComponent implements OnInit {
   }
 
   playGame(params: any) {
-    console.log('params:', params);
     this.isPlaying = true;
     this.gameParams = new GameParams();
     this.gameParams.width = params.boardWidth;
     this.gameParams.height = params.boardWidth;
-    this.gameParams.pitsCount = params.pitsCount;
+    this.gameParams.wellsCount = params.wellsCount;
     this.gameParams.arrowsCount = params.arrowsCount;
   }
 

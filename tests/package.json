@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "test": "testcafe chrome index.js"
+  },
+  "dependencies": {
+    "testcafe": "^1.3.1",
+    "testcafe-angular-selectors": "^0.3.2"
+  }
+}

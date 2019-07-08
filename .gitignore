@@ -9,6 +9,7 @@
 
 # dependencies
 /game/node_modules
+/tests/node_modules
 
 # profiling files
 chrome-profiler-events.json

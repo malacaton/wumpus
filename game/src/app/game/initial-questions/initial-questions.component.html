@@ -5,7 +5,7 @@
           Alto / ancho del tablero (entre 4 y 15)
       </td>
       <td class="cell">
-          <input type="number" min="4" max="15" class="form-control" [(ngModel)]="boardWidth" (change)="onBoardWithChange()">
+          <input type="number" id="height-width" min="4" max="15" class="form-control" [(ngModel)]="boardWidth" (change)="onBoardWithChange()">
       </td>
       <td class="cell">
         &nbsp;
@@ -16,7 +16,7 @@
           Nº de pozos (Máximo {{totalCells - 3}})
       </td>
       <td class="cell">
-          <input type="number" min="0" class="form-control" [(ngModel)]="wellsCount" (change)="onWellsCountChange()">
+          <input type="number" id="wells-count" min="0" class="form-control" [(ngModel)]="wellsCount" (change)="onWellsCountChange()">
       </td>
       <td class="cell">
           &nbsp;
@@ -27,10 +27,10 @@
           Nº de flechas
       </td>
       <td class="cell">
-          <input type="number" min="1" class="form-control" [(ngModel)]="arrowsCount">
+          <input type="number" id="arrows-count" min="1" class="form-control" [(ngModel)]="arrowsCount">
       </td>
       <td class="cell">
-          <button type="button" class="btn btn-primary" (click)="startGame()">Comenzar</button>
+          <button type="button" id="start-game-button" class="btn btn-primary" (click)="startGame()">Comenzar</button>
       </td>
     </tr>
   </tbody>

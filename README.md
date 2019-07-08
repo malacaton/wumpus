@@ -13,6 +13,11 @@ RESOLUCIÓN
 ======
 Siguiendo instrucciones de Emma Perez, de Robert Walters Valencia, he realizado este test con Angular 8
 
-Como se trata de una prueba para Frontend, he pensado que no tenía demasiado sentido realizar el juego con Angular y solo en modo texto, así que he añadido también una interfaz gráfica sencilla, pero que permitirá valorar mejor mi destreza en proyectos de más embergadura.
+Como se trata de una prueba para Frontend, he pensado que no tenía demasiado sentido realizar el juego con Angular y solo en modo texto, así que he añadido también una interfaz gráfica sencilla, pero que permitirá valorar mejor mi destreza en proyectos de este tipo.
 
 El proyecto está realizado con Angular 8, aunque creo que también se podría hacer sobre Angular 6 o 7. Solo tengo dudas con la técnica de captura de las teclas presionadas, ya que no recuerdo si con Angular 6 también se hacía así.
+
+El cazador percibe en las adyacentes el hedor del Wumpus, y la brisa de los pozos. He hecho también que pudiese percibir el brillo del oro para bajar la dificultad del juego, aunque esta característica está comentada ya que no se indicó en las especificaciones.
+
+El proyecto de test lo he realizado utilizando TestCafe. Solo dependende de Node, y se instala con "npm install" desde su carpeta ya que las dependencias están especificadas en su 'package.json', junto con 'testcafe-angular-selectors' . Los tests se hacen contra el servidor localhost:4200, que es dónde se ejecuta Angular por defecto, así que para lanzarlos, primero se debe ejecutar el proyecto 'game' con 'ng s' desde CMD o PowerShell en su carpeta, y luego lanzar los tests desde otra ventana CMD o PowerShell.
+

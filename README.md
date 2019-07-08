@@ -35,4 +35,3 @@ Para ejecutar los test:
 Se han realizado dos tests, aunque cada uno lleva varias acciones:
 - El primero sirve para comprobar que el juego permite iniciarse y los parámetros que se le establecen son procesados correctamente
 - El segunto comprueba los movimientos y disparo dentro del juego.
-

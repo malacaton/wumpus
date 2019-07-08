@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
-import { GameParams } from '../models/game-params';
-import { Tile } from '../models/tile';
-import { Coordinates } from '../models/coordinates';
+import { GameParams } from '../../models/game-params';
+import { Tile } from '../../models/tile';
+import { Coordinates } from '../../models/coordinates';
 
 export enum KEY_CODE {
   FIRE = 13, // enter
   EXIT = 32, // space
-  WALK = 87, // w
-  TURN_LEFT = 65, // a
-  TURN_RIGHT = 68 // d
+  WALK = 38, // up arrow
+  TURN_LEFT = 37, // left arrow
+  TURN_RIGHT = 39 // right arrow
 }
 
 export enum MESSAGES {
@@ -223,7 +223,9 @@ export class GameBoardComponent implements OnInit {
 
     if (!this.ended) {
       if (tile.hasBrightness) {
-        this.perceptions.push(MESSAGES.BRIGHTNESS);
+        // Esto se activaría si quisiesemos percibir el brillo del oro en las adyacentes,
+        // para bajar de esta forma la dificultad del juego
+        // this.perceptions.push(MESSAGES.BRIGHTNESS);
       }
       if (tile.hasBreeze) {
         this.perceptions.push(MESSAGES.BREEZE);

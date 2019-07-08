@@ -4,17 +4,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { TileComponent } from './tile/tile.component';
-import { InitialQuestionsComponent } from './initial-questions/initial-questions.component';
+import { InitialQuestionsComponent } from './game/initial-questions/initial-questions.component';
 import { GameComponent } from './game/game.component';
-import { GameBoardComponent } from './game-board/game-board.component';
-import { PropertiesComponent } from './properties/properties.component';
-import { PerceptionsComponent } from './perceptions/perceptions.component';
+import { GameBoardComponent } from './game/game-board/game-board.component';
+import { PropertiesComponent } from './game/game-board/properties/properties.component';
+import { PerceptionsComponent } from './game/game-board/perceptions/perceptions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TileComponent,
     InitialQuestionsComponent,
     GameComponent,
     GameBoardComponent,

@@ -44,7 +44,8 @@
 }
 
 .cell {
-  border: 1px dashed #999;
+  border: 1px dashed #ddd;
+  //border: 0px;
   padding: 0px;
 }
 
@@ -75,6 +76,11 @@
   background-color: lightcyan;
 }
 
+.positionTileRelative {
+  top: -50px;
+  position: relative;
+}
+
 .startPoint {
   background-color: cyan;
 }
@@ -100,9 +106,11 @@
 }
 
 .hunter {
-  background-image: url('/assets/hunter-right.png');
+  background-image: url('/assets/hunter.png');
   height: 50px;
   width: 50px;
+  top: -50px;
+  position: relative;
 
   &.hunterDown {
     transform: rotate(90deg); /* w3org */
@@ -127,14 +135,15 @@
   }
 }
 
-.tileNormal {
+.tileBackground {
   background-image: url('/assets/tile4.png');
-}
-
-.tileCorner {
-  background-image: url('/assets/tile2.png');
+  
+  &.topLeft {
+    background-image: url('/assets/tile2.png');
+  }
 
   &.topRight {
+    background-image: url('/assets/tile2.png');
     transform: rotate(90deg); /* w3org */
     -moz-transform: rotate(90deg); /* Firefox */
     -o-transform: rotate(90deg); /* Opera */
@@ -142,6 +151,7 @@
   }
 
   &.bottomRight {
+    background-image: url('/assets/tile2.png');
     transform: rotate(180deg); /* w3org */
     -moz-transform: rotate(180deg); /* Firefox */
     -o-transform: rotate(180deg); /* Opera */
@@ -149,17 +159,19 @@
   }
 
   &.bottomLeft {
+    background-image: url('/assets/tile2.png');
     transform: rotate(270deg); /* w3org */
     -moz-transform: rotate(270deg); /* Firefox */
     -o-transform: rotate(270deg); /* Opera */
     -webkit-transform: rotate(270deg); /* Chrome y Safari */
   }
-}
-
-.tileBorder {
-  background-image: url('/assets/tile3.png');
+  
+  &.top {
+    background-image: url('/assets/tile3.png');
+  }
 
   &.right {
+    background-image: url('/assets/tile3.png');
     transform: rotate(90deg); /* w3org */
     -moz-transform: rotate(90deg); /* Firefox */
     -o-transform: rotate(90deg); /* Opera */
@@ -167,6 +179,7 @@
   }
 
   &.bottom {
+    background-image: url('/assets/tile3.png');
     transform: rotate(180deg); /* w3org */
     -moz-transform: rotate(180deg); /* Firefox */
     -o-transform: rotate(180deg); /* Opera */
@@ -174,6 +187,7 @@
   }
 
   &.left {
+    background-image: url('/assets/tile3.png');
     transform: rotate(270deg); /* w3org */
     -moz-transform: rotate(270deg); /* Firefox */
     -o-transform: rotate(270deg); /* Opera */

@@ -558,6 +558,41 @@ export class GameBoardComponent {
     return (this.hunterY === row && this.hunterX === col);
   }
 
+  // #region Get backgrounds pictures
+  getIsTopLeft(row: number, col: number) {
+    return (row === 0 && col === 0);
+  }
+
+  getIsTopRignt(row: number, col: number) {
+    return (row === 0 && col === this.getWidth() - 1);
+  }
+
+  getIsBottomRight(row: number, col: number) {
+    return (row === this.getHeight() - 1 && col === this.getWidth() - 1);
+  }
+
+  getIsBottomLeft(row: number, col: number) {
+    return (row === this.getHeight() - 1 && col === 0);
+  }
+
+  getIsTop(row: number, col: number) {
+    return (row === 0 && col > 0 && col < this.getWidth() - 1);
+  }
+
+  getIsRight(row: number, col: number) {
+    return (row > 0 && row < this.getHeight() - 1 && col === this.getWidth() - 1);
+  }
+
+  getIsBottom(row: number, col: number) {
+    return (row === this.getHeight() - 1 && col > 0 && col < this.getWidth() - 1);
+  }
+
+  getIsLeft(row: number, col: number) {
+    return (row > 0 && row < this.getHeight() - 1 && col === 0);
+  }
+  // #endregion
+
+
   getIsDone() { // Return true when the game is completed
     return this.done;
   }

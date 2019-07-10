@@ -10,16 +10,9 @@
   <tbody>
     <tr>
       <td class="propertiesPanel">
-        <app-properties
-          [height]="getHeight()" 
-          [width]="getWidth()" 
-          [arrowsInCarcaj]="getArrowsInCarcaj()" 
-          [isWumpusIsDead]="getWumpusIsDead()"
-          [isGoldFound]="getGoldFound()"
-          [steps]="getSteps()"
-          [hunterY]="getHunterY()"
-          [hunterX]="getHunterX()"
-        >
+        <app-properties [height]="getHeight()" [width]="getWidth()" [arrowsInCarcaj]="getArrowsInCarcaj()"
+          [isWumpusIsDead]="getWumpusIsDead()" [isGoldFound]="getGoldFound()" [steps]="getSteps()"
+          [hunterY]="getHunterY()" [hunterX]="getHunterX()">
         </app-properties>
       </td>
 
@@ -33,12 +26,27 @@
             <tbody>
               <tr *ngFor="let row of board; let rowNumber=index" [attr.data-index]="rowNumber">
                 <td *ngFor="let col of row; let colNumber=index" [attr.data-index]="colNumber" class="cell">
-                  <div class="tile" [ngClass]="{'startPoint': getIsStartPoint(rowNumber, colNumber), 'visibleTile': getIsVisible(rowNumber, colNumber), 'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeadTile': getIsWumpusDeadPosition(rowNumber, colNumber), 'pitTile': getIsPitPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber), 'pickedGoldTile': getIsPickedGoldPosition(rowNumber, colNumber)}">
-                    <div *ngIf="getIsStartPoint(rowNumber, colNumber)" id="startPoint" class="exit">
+                  <div class="tile" [ngClass]="{'startPoint': getIsStartPoint(rowNumber, colNumber)}">
+                    <div class="tile" [ngClass]="{'tileBackground': getIsVisible(rowNumber, colNumber), 
+                                                'topLeft': getIsTopLeft(rowNumber, colNumber), 
+                                                'topRight': getIsTopRignt(rowNumber, colNumber), 
+                                                'bottomRight': getIsBottomRight(rowNumber, colNumber), 
+                                                'bottomLeft': getIsBottomLeft(rowNumber, colNumber), 
+                                                'top': getIsTop(rowNumber, colNumber), 
+                                                'right': getIsRight(rowNumber, colNumber), 
+                                                'bottom': getIsBottom(rowNumber, colNumber), 
+                                                'left': getIsLeft(rowNumber, colNumber)}">
+                    </div>
+                    <div *ngIf="getIsStartPoint(rowNumber, colNumber)" id="startPoint" class="exit positionTileRelative">
                       SALIDA
                     </div>
-                    <div *ngIf="hunterY === rowNumber && hunterX === colNumber">
-                      <div class="hunter" [ngClass]="{'hunterDown': hunterDirection === 1, 'hunterLeft': hunterDirection === 2, 'hunterUp': hunterDirection === 3}"></div>
+                    <div class="tile positionTileRelative"
+                      [ngClass]="{'wumpusTile': getIsWumpusPosition(rowNumber, colNumber), 'wumpusDeadTile': getIsWumpusDeadPosition(rowNumber, colNumber), 'pitTile': getIsPitPosition(rowNumber, colNumber), 'goldTile': getIsGoldPosition(rowNumber, colNumber), 'pickedGoldTile': getIsPickedGoldPosition(rowNumber, colNumber)}">
+                    </div>
+                    <div *ngIf="hunterY === rowNumber && hunterX === colNumber" class="positionTileRelative">
+                      <div class="hunter"
+                        [ngClass]="{'hunterDown': hunterDirection === 1, 'hunterLeft': hunterDirection === 2, 'hunterUp': hunterDirection === 3}">
+                      </div>
                     </div>
                   </div>
                 </td>

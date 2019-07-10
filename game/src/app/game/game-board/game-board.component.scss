@@ -84,7 +84,7 @@
 }
 
 .wumpusDeadTile {
-  background-image: url('/assets/wumpus-death.png');
+  background-image: url('/assets/wumpus-dead.png');
 }
 
 .pitTile {
@@ -120,6 +120,60 @@
   }
 
   &.hunterUp {
+    transform: rotate(270deg); /* w3org */
+    -moz-transform: rotate(270deg); /* Firefox */
+    -o-transform: rotate(270deg); /* Opera */
+    -webkit-transform: rotate(270deg); /* Chrome y Safari */
+  }
+}
+
+.tileNormal {
+  background-image: url('/assets/tile4.png');
+}
+
+.tileCorner {
+  background-image: url('/assets/tile2.png');
+
+  &.topRight {
+    transform: rotate(90deg); /* w3org */
+    -moz-transform: rotate(90deg); /* Firefox */
+    -o-transform: rotate(90deg); /* Opera */
+    -webkit-transform: rotate(90deg); /* Chrome y Safari */
+  }
+
+  &.bottomRight {
+    transform: rotate(180deg); /* w3org */
+    -moz-transform: rotate(180deg); /* Firefox */
+    -o-transform: rotate(180deg); /* Opera */
+    -webkit-transform: rotate(180deg); /* Chrome y Safari */
+  }
+
+  &.bottomLeft {
+    transform: rotate(270deg); /* w3org */
+    -moz-transform: rotate(270deg); /* Firefox */
+    -o-transform: rotate(270deg); /* Opera */
+    -webkit-transform: rotate(270deg); /* Chrome y Safari */
+  }
+}
+
+.tileBorder {
+  background-image: url('/assets/tile3.png');
+
+  &.right {
+    transform: rotate(90deg); /* w3org */
+    -moz-transform: rotate(90deg); /* Firefox */
+    -o-transform: rotate(90deg); /* Opera */
+    -webkit-transform: rotate(90deg); /* Chrome y Safari */
+  }
+
+  &.bottom {
+    transform: rotate(180deg); /* w3org */
+    -moz-transform: rotate(180deg); /* Firefox */
+    -o-transform: rotate(180deg); /* Opera */
+    -webkit-transform: rotate(180deg); /* Chrome y Safari */
+  }
+
+  &.left {
     transform: rotate(270deg); /* w3org */
     -moz-transform: rotate(270deg); /* Firefox */
     -o-transform: rotate(270deg); /* Opera */
